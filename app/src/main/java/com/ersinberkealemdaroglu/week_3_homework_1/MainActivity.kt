@@ -1,16 +1,16 @@
 package com.ersinberkealemdaroglu.week_3_homework_1
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ersinberkealemdaroglu.week_3_homework_1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var saveTextValue : String
 
     companion object {
-        const val key = "name" // const key to save/read value from bundle
+        var countValue: Int = 0
+        const val key = "counter" // const key to save/read value from bundle
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,59 +18,62 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        nameSaveText()
-        println("oncreate")
+        plusButtonCounter()
+        minusButtonCounter()
+
+        println("onCreate")
     }
-    private fun nameSaveText(){
-        binding.button.setOnClickListener {
-            saveTextValue = binding.editTextTextPersonName.text.toString()
-                binding.textView.text = saveTextValue
+
+    private fun plusButtonCounter() {
+        binding.plusButton.setOnClickListener {
+            countValue++
+            binding.counterText.text = countValue.toString()
+        }
+    }
+
+    private fun minusButtonCounter() {
+        binding.minusButton.setOnClickListener {
+            if (countValue >= 1) {
+                countValue--
+                binding.counterText.text = countValue.toString()
+            }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
-        outState.putString(key, binding.editTextTextPersonName.text.toString())
+        outState.putInt(key, countValue)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val name = savedInstanceState.getString(key, binding.editTextTextPersonName.text.toString())
-        binding.textView.text = name
+        savedInstanceState.getInt(key, countValue)
+        binding.counterText.text = "$countValue"
     }
 
     override fun onStart() {
         super.onStart()
 
-        println("start")
+        println("onStart")
     }
 
     override fun onResume() {
         super.onResume()
 
-        println("onresume")
+        println("onResume")
     }
 
     override fun onPause() {
         super.onPause()
 
-        println("pause")
+        println("onPause")
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
-        println("destroy")
+        println("onDestroy")
     }
-
-
-
-
-
-
-
-
-
 
 
 }
