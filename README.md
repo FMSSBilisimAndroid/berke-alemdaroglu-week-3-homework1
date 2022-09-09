@@ -22,4 +22,14 @@
 <!--Most Used Languages-->
 <img  src="https://github-readme-stats.vercel.app/api/top-langs/?username=berkealemdaroglu&layout=compact&hide=html,css" alt="My Top Langs" />
 
+# onSaveInstanceState ve onRestoreInstanceState Metotları
 
+### onSaveInstanceState metot ile app destroy olsa bile kullanıcıya göstermeye devam edebiliriz. İstediğimiz verileri putString, putInt vb. gibi değişkenlerle tutabiliriz.
+### onRestoreInstanceState metot ile onSaveInstanceState de tuttuğumuz verileri getString, getInt vb. gibi değişkenlerle kullanıca tekrar gösterebiliriz.
+https://user-images.githubusercontent.com/50260160/189455589-06ad9ed8-4c85-4911-b19e-6160300ec7db.mp4
+
+##### Yapacağımız uygulamada yatay görünüm mevcutsa onSaveInstanceState ve onRestoreInstanceState kullanmazsak, kullanıclar uygulamayı döndürdüklerinde onPause ve onDestroy çalıştığından tüm veriler
+kaybolacaktır. Bu kullanıcı deneyimi açısından felaket olacağından, verileri onSaveInstanceState ve onRestoreInstanceState ile tutarak bu sorunu kolaylıkla aşarız.
+
+### Bu Metotlar Nasıl Kullanılır?
+#### Her iki metot kullanmak için override fonksiyonlarını çağırmamız gerekiyor. Metotlar bir key value ile birbirlerine bağlanıyorlar. Bu bağlantı sonucu veriler kaybolmadan textView vb. gibi değişkenlerde göstermemize olanak sağlıyor. 
