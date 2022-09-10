@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         println("onCreate")
     }
 
+    /**
+     * plusButton.setOnClickListener ile counterText de gösterdiğimiz countValue değerini bir arttırıyoruz.
+     */
     private fun plusButtonCounter() {
         binding.plusButton.setOnClickListener {
             countValue++
@@ -31,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * minusButton.setOnClickListener ile counterText de gösterdiğimiz countValue değerini 0'a kadar bir azaltıyoruz.
+     */
     private fun minusButtonCounter() {
         binding.minusButton.setOnClickListener {
             if (countValue >= 1) {
@@ -40,11 +46,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * @param outState ile destroy olan verileri putInt ile saklayarak bir key value da tutuyoruz.
+     */
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         outState.putInt(key, countValue)
     }
 
+    /**
+     * @param savedInstanceState de saklanan verileri onSaveInstanceState'de verdiğimiz key value ile çekip, tekrardan counterText view da gösteriyoruz.
+     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState.getInt(key, countValue)
@@ -67,6 +79,18 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
 
         println("onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        println("onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        println("onRestart")
     }
 
     override fun onDestroy() {
